@@ -25,7 +25,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<span>{{Configuration}}</span>
 			</div>
 		</div>
-		<legend><i class="fas fa-table"></i> {{Mes carters usb8relaiss}}</legend>
+		<legend><i class="fas fa-table"></i> {{Mes carters usb8relais}}</legend>
 		<!-- Champ de recherche -->
 		<div class="input-group" style="margin:5px;">
 			<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic"/>
@@ -82,7 +82,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
 									<div class="col-xs-11 col-sm-7">
 										<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;"/>
-										<input type="text" class="eqLogicAttr form-control" data-l1key="nom_carte" placeholder="{{Nom de l'équipement}}"/>
+										<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
 									</div>
 								</div>
 								<div class="form-group">
