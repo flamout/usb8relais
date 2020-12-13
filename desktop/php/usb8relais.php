@@ -125,11 +125,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Paramètre n°1}}</label>
 									<div class="col-xs-11 col-sm-7">
-										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="Port de la carte" placeholder="/dev/ttyUSB0"/>
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="port_carte" placeholder="/dev/ttyUSB0"/>
 									</div>
 									<label class="col-sm-3 control-label">{{Paramètre n°2}}</label>
 									<div class="col-xs-11 col-sm-7">
-										<input type="numeric" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="Durée d'impulsion" placeholder=0.5/>
+										<input type="numeric" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="duree_impulsion" placeholder=0.5/>
 									</div>
 								</div>
 								<!-- Champ de saisie du cron d'auto-actualisation + assistant cron -->
