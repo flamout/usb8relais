@@ -79,7 +79,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<fieldset>
 								<legend><i class="fas fa-wrench"></i> {{Général}}</legend>
 								<div class="form-group">
-									<label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
+									<label class="col-sm-3 control-label">{{Nom de l 'équipement}}</label>
 									<div class="col-xs-11 col-sm-7">
 										<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;"/>
 										<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
@@ -123,13 +123,45 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<br/>
 								<legend><i class="fas fa-cogs"></i> {{Paramètres}}</legend>
 								<div class="form-group">
-									<label class="col-sm-3 control-label">{{Port de la carte}}</label>
+									<label class="col-sm-3 control-label">{{Port a utiliser}}</label>
 									<div class="col-xs-11 col-sm-7">
 										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="port_carte" placeholder="/dev/ttyUSB0"/>
 									</div>
 									<label class="col-sm-3 control-label">{{Durée d'impulsion}}</label>
 									<div class="col-xs-11 col-sm-7">
 										<input type="numeric" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="duree_impulsion" placeholder=0.5 />
+									</div>
+									<label class="col-sm-3 control-label">{{Relais N° 1}}</label>
+									<div class="col-xs-11 col-sm-7">
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nmrelais1" value ="Relais 1"/>
+									</div>
+									<label class="col-sm-3 control-label">{{Relais N° 2}}</label>
+									<div class="col-xs-11 col-sm-7">
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nmrelais2" value ="Relais 2"/>
+									</div>
+									<label class="col-sm-3 control-label">{{Relais N° 3}}</label>
+									<div class="col-xs-11 col-sm-7">
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nmrelais3" value ="Relais 3"/>
+									</div>
+									<label class="col-sm-3 control-label">{{Relais N° 4}}</label>
+									<div class="col-xs-11 col-sm-7">
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nmrelais4" value ="Relais 4"/>
+									</div>
+									<label class="col-sm-3 control-label">{{Relais N° 5}}</label>
+									<div class="col-xs-11 col-sm-7">
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nmrelais5" value ="Relais 5"/>
+									</div>
+									<label class="col-sm-3 control-label">{{Relais N° 6}}</label>
+									<div class="col-xs-11 col-sm-7">
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nmrelais6" value ="Relais 6"/>
+									</div>
+									<label class="col-sm-3 control-label">{{Relais N° 7}}</label>
+									<div class="col-xs-11 col-sm-7">
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nmrelais7" value ="Relais 7"/>
+									</div>
+									<label class="col-sm-3 control-label">{{Relais N° 8}}</label>
+									<div class="col-xs-11 col-sm-7">
+										<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nmrelais8" value ="Relais 8"/>
 									</div>
 								</div>
 								<!-- Champ de saisie du cron d'auto-actualisation + assistant cron -->
