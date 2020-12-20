@@ -534,7 +534,7 @@ class usb8relais extends eqLogic {
 			// First we must specify the device. This works on both linux and windows (if
 			// your linux serial device is /dev/ttyS0 for COM1, etc)
 			$serial->deviceSet($this->getconfiguration('port_carte'));
-			$nom_carte=$this->getconfiguration('nom_carte');
+			$nom_carte=$this->getconfiguration('name');
 			// We can change the baud rate, parity, length, stop bits, flow control
 /*      	$serial->confBaudRate(9600);
 			$serial->confParity("none");
@@ -616,7 +616,7 @@ class usb8relais extends eqLogic {
         
 
 			$port_carte=$this->getconfiguration('port_carte');
-			$nom_carte=$this->getconfiguration('nom_carte');
+			$nom_carte=$this->getconfiguration('name');
 			$duree_imp=$this->getconfiguration('duree_impulsion');
 
 			if ($action=="on") {
