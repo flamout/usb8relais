@@ -98,88 +98,130 @@ class usb8relais extends eqLogic {
 
  // Fonction exécutée automatiquement avant la sauvegarde (création ou mise à jour) de l'équipement 
     public function preSave() {
-        
+
     }
 
  // Fonction exécutée automatiquement après la sauvegarde (création ou mise à jour) de l'équipement 
     public function postSave() {
-        $cmd_list = array(
+
+        $nmrel1 = $this->getconfiguration('nmrelais1');
+        if ($nmrel1 == "") {
+          	$nmrel1 = "Relais 1";
+        }
+        $nmrel2 = $this->getconfiguration('nmrelais2');
+        if ($nmrel2 == "") {
+          	$nmrel2 = "Relais 2";
+        }
+        $nmrel3 = $this->getconfiguration('nmrelais3');
+        if ($nmrel3 == "") {
+          	$nmrel3 = "Relais 3";
+        }
+        $nmrel4 = $this->getconfiguration('nmrelais4');
+        if ($nmrel4 == "") {
+          	$nmrel4 = "Relais 4";
+        }
+        $nmrel5 = $this->getconfiguration('nmrelais5');
+        if ($nmrel5 == "") {
+          	$nmrel5 = "Relais 5";
+        }
+        $nmrel6 = $this->getconfiguration('nmrelais6');
+        if ($nmrel6 == "") {
+          	$nmrel6 = "Relais 6";
+        }
+        $nmrel7 = $this->getconfiguration('nmrelais7');
+        if ($nmrel7 == "") {
+          	$nmrel7 = "Relais 7";
+        }
+        $nmrel8 = $this->getconfiguration('nmrelais8');
+        if ($nmrel8 == "") {
+          	$nmrel8 = "Relais 8";
+        }
+      
+		$nm1 = 'Etat '.$nmrel1;
+		$nm2 = 'Etat '.$nmrel2;
+       	$nm3 = 'Etat '.$nmrel3;
+        $nm4 = 'Etat '.$nmrel4;
+        $nm5 = 'Etat '.$nmrel5;
+        $nm6 = 'Etat '.$nmrel6;
+        $nm7 = 'Etat '.$nmrel7;
+        $nm8 = 'Etat '.$nmrel8;
+      
+              $cmd_list = array(
 				'etr1' => array(
-					'name' => __('Etat relais 1', __FILE__),
+                  	'name' => __($nm1, __FILE__),
 					'subtype' => 'binary',
 					'type' => 'info',
                     'order' => 1,
 				),
 				'etr2' => array(
-					'name' => __('Etat relais 2', __FILE__),
+                    'name' => __($nm2, __FILE__),
 					'subtype' => 'binary',
 					'type' => 'info',
 					'order' => 2,
 				),
 				'etr3' => array(
-					'name' => __('Etat relais 3', __FILE__),
+					'name' => __($nm3, __FILE__),
 					'subtype' => 'binary',
 					'type' => 'info',
 					'order' => 3,
 				),
 				'etr4' => array(
-					'name' => __('Etat relais 4', __FILE__),
+					'name' => __($nm4, __FILE__),
 					'subtype' => 'binary',
 					'type' => 'info',
 					'order' => 4,
 				),
 				'etr5' => array(
-					'name' => __('Etat relais 5', __FILE__),
+					'name' => __($nm5, __FILE__),
 					'subtype' => 'binary',
 					'type' => 'info',
 					'order' => 5,
 				),
 				'etr6' => array(
-					'name' => __('Etat relais 6', __FILE__),
+					'name' => __($nm6, __FILE__),
 					'subtype' => 'binary',
 					'type' => 'info',
 					'order' => 6,
 				),
 				'etr7' => array(
-					'name' => __('Etat relais 7', __FILE__),
+					'name' => __($nm7, __FILE__),
 					'subtype' => 'binary',
 					'type' => 'info',
 					'order' => 7,
 				),
 				'etr8' => array(
-					'name' => __('Etat relais 8', __FILE__),
+					'name' => __($nm8, __FILE__),
 					'subtype' => 'binary',
 					'type' => 'info',
 					'order' => 8,
 				),
 			);
+      
 		foreach ($this->getCmd() as $cmd) {
-			if (!isset($cmd_list[$cmd->getLogicalId()]) && $cmd->getLogicalId() != 'refresh') {
 				$cmd->remove();
-			}
 		}
-		
+      
 		foreach ($cmd_list as $key => $cmd_info) {
 			$cmd = $this->getCmd(null, $key);
 			if (!is_object($cmd)) {
 				$cmd = new usb8relaisCmd();
 				$cmd->setLogicalId($key);
 				$cmd->setIsVisible(1);
-				$cmd->setName($cmd_info['name']);
 				$cmd->setOrder($cmd_info['order']);
 			}
+			$cmd->setName($cmd_info['name']);
 			$cmd->setType($cmd_info['type']);
 			$cmd->setSubType($cmd_info['subtype']);
 			$cmd->setEqLogic_id($this->getId());
 			$cmd->setEventOnly(1);
 			$cmd->save();
 		}
-		
-		$usb8relaiscmd = $this->getCmd(null, 'r1on');
+      
+        $usb8relaiscmd = $this->getCmd(null, 'r1on');
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
-		}
-        $usb8relaiscmd->setName(__('Relais 1 ON',__FILE__));
+        }
+      	$usb8relaiscmd->setName(__($nmrel1.' ON' ,__FILE__));
 		$usb8relaiscmd->setLogicalId('r1on');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -190,8 +232,8 @@ class usb8relais extends eqLogic {
     	$usb8relaiscmd = $this->getCmd(null, 'r2on');
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
-		}
-        $usb8relaiscmd->setName(__('Relais 2 ON',__FILE__));
+        }
+        $usb8relaiscmd->setName(__($nmrel2.' ON',__FILE__));
 		$usb8relaiscmd->setLogicalId('r2on');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -203,7 +245,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 3 ON',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel3.' ON',__FILE__));
 		$usb8relaiscmd->setLogicalId('r3on');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -215,7 +257,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 4 ON',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel4.' ON',__FILE__));
 		$usb8relaiscmd->setLogicalId('r4on');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -227,7 +269,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 5 ON',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel5.' ON',__FILE__));
 		$usb8relaiscmd->setLogicalId('r5on');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -239,7 +281,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 6 ON',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel6.' ON',__FILE__));
 		$usb8relaiscmd->setLogicalId('r6on');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -251,7 +293,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 7 ON',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel7.' ON',__FILE__));
 		$usb8relaiscmd->setLogicalId('r7on');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -263,7 +305,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 8 ON',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel8.' ON',__FILE__));
 		$usb8relaiscmd->setLogicalId('r8on');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -277,7 +319,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 1 OFF',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel1.' OFF',__FILE__));
 		$usb8relaiscmd->setLogicalId('r1off');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -289,7 +331,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 2 OFF',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel2.' OFF',__FILE__));
 		$usb8relaiscmd->setLogicalId('r2off');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -301,7 +343,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 3 OFF',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel3.' OFF',__FILE__));
 		$usb8relaiscmd->setLogicalId('r3off');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -313,7 +355,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 4 OFF',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel4.' OFF',__FILE__));
 		$usb8relaiscmd->setLogicalId('r4off');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -325,7 +367,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 5 OFF',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel5.' OFF',__FILE__));
 		$usb8relaiscmd->setLogicalId('r5off');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -337,7 +379,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 6 OFF',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel6.' OFF',__FILE__));
 		$usb8relaiscmd->setLogicalId('r6off');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -349,7 +391,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 7 OFF',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel7.' OFF',__FILE__));
 		$usb8relaiscmd->setLogicalId('r7off');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -361,7 +403,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 8 OFF',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel8.' OFF',__FILE__));
 		$usb8relaiscmd->setLogicalId('r8off');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -375,7 +417,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 1 IMPULSION',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel1.' IMPULSION',__FILE__));
 		$usb8relaiscmd->setLogicalId('r1imp');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -387,7 +429,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 2 IMPULSION',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel2.' IMPULSION',__FILE__));
 		$usb8relaiscmd->setLogicalId('r2imp');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -399,7 +441,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 3 IMPULSION',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel3.' IMPULSION',__FILE__));
 		$usb8relaiscmd->setLogicalId('r3imp');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -411,7 +453,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 4 IMPULSION',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel4.' IMPULSION',__FILE__));
 		$usb8relaiscmd->setLogicalId('r4imp');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -423,7 +465,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 5 IMPULSION',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel5.' IMPULSION',__FILE__));
 		$usb8relaiscmd->setLogicalId('r5imp');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -435,7 +477,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 6 IMPULSION',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel6.' IMPULSION',__FILE__));
 		$usb8relaiscmd->setLogicalId('r6imp');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -447,7 +489,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 7 IMPULSION',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel7.' IMPULSION',__FILE__));
 		$usb8relaiscmd->setLogicalId('r7imp');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -459,7 +501,7 @@ class usb8relais extends eqLogic {
 		if (!is_object($usb8relaiscmd)) {
 			$usb8relaiscmd = new usb8relaiscmd();
 		}
-        $usb8relaiscmd->setName(__('Relais 8 IMPULSION',__FILE__));
+        $usb8relaiscmd->setName(__($nmrel8.' IMPULSION',__FILE__));
 		$usb8relaiscmd->setLogicalId('r8imp');
 	    $usb8relaiscmd->setEqLogic_id($this->getId());
 		$usb8relaiscmd->setType('action');
@@ -467,7 +509,8 @@ class usb8relais extends eqLogic {
 		$usb8relaiscmd->setDisplay('generic_type','LIGHT_ON');
 		$usb8relaiscmd->save();
 
-		$refresh = $this->getCmd(null, 'refresh');
+
+      	$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
 			$refresh = new usb8relaisCmd();
 			$refresh->setName(__('Rafraichir', __FILE__));
@@ -480,7 +523,9 @@ class usb8relais extends eqLogic {
 		$refresh->save();
 
 		$this->majInfo();
-	}
+
+    
+    }
 		
 		public function majinfo() {
 			include "php_serial.class.php";      
@@ -808,5 +853,3 @@ class usb8relaisCmd extends cmd {
 
     /*     * **********************Getteur Setteur*************************** */
 }
-
-
