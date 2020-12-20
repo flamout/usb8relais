@@ -7,6 +7,7 @@
 # 20/12/2020
 
 - rajout de la fonciton modification des noms des relais
+- suppression des parametres inutiles dans la configuration du plugin
 
 # 06/12/2020
 
